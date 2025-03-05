@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">LoremPicsum</string>
     <string name="image_card_description">LoremPicsum Downloaded Image</string>
+    <string name="dropdown_icon">DropDown Icon</string>
+    <string name="filter_label">Filter:</string>
+    <string name="clear">Clear</string>
 </resources>
