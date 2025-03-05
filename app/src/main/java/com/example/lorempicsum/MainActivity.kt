@@ -11,11 +11,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.lorempicsum.data.api.ImageApiServiceImpl
+import com.example.lorempicsum.repo.ImageRepoImpl
 import com.example.lorempicsum.ui.theme.LoremPicsumTheme
+import kotlinx.coroutines.runBlocking
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        startKoin {
+            androidLogger()
+            androidContext(this@MainActivity)
+            modules(
+                //interactionModule, networkModule, presentationModule, repositoryModule
+            )
+        }
+
+
         enableEdgeToEdge()
         setContent {
             LoremPicsumTheme {
@@ -32,6 +48,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+    val apiService = ImageApiServiceImpl()
+    val repo = ImageRepoImpl(apiService)
+    runBlocking {
+        repo.getImageList(1, 10).forEach {
+            println(it)
+        }
+    }
     Text(
         text = "Hello $name!",
         modifier = modifier
