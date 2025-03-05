@@ -3,16 +3,15 @@ package com.example.lorempicsum
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lorempicsum.data.api.ImageApiServiceImpl
 import com.example.lorempicsum.repo.ImageRepoImpl
+import com.example.lorempicsum.ui.composables.ImageList
 import com.example.lorempicsum.ui.theme.LoremPicsumTheme
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.koin.androidContext
@@ -32,7 +31,7 @@ class MainActivity : ComponentActivity() {
         }
 
 
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
             LoremPicsumTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -50,15 +49,12 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val apiService = ImageApiServiceImpl()
     val repo = ImageRepoImpl(apiService)
-    runBlocking {
-        repo.getImageList(1, 10).forEach {
-            println(it)
-        }
+    val imageList = runBlocking {
+        repo.getImageList(1, 50)
     }
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+
+    ImageList(imageList)
+
 }
 
 @Preview(showBackground = true)

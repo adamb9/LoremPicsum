@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LoremPicsum</string>
+    <string name="image_card_description">LoremPicsum Downloaded Image</string>
 </resources>
