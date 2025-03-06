@@ -42,7 +42,9 @@ fun ImageListScreen(
             ) {
                 CustomTopBar(
                     onFilterClick = { viewModel.onFilterClick() },
-                    onSortClick = { viewModel.onSortClick() }
+                    onSortClick = { viewModel.onSortClick() },
+                    onDisableOfflineModeClick = { viewModel.disableOfflineMode() },
+                    showDisableOfflineMode = state.offlineModeEnabled
                 )
             }
         }

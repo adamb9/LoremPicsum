@@ -12,4 +12,5 @@
     <string name="top_bar_icon_label">Top Bar icon</string>
     <string name="filter_icon_label">filterIcon</string>
     <string name="sort_icon_label">sortIcon</string>
+    <string name="refresh_icon_label">refreshIcon</string>
 </resources>

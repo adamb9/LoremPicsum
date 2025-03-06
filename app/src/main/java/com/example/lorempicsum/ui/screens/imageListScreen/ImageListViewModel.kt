@@ -114,6 +114,13 @@ class ImageListViewModel(
         loadImages(true)
     }
 
+    fun disableOfflineMode() {
+        _state.value = _state.value.copy(
+            offlineModeEnabled = false
+        )
+        loadImages(false)
+    }
+
     private fun restoreLastSavedAuthorFilter() {
         viewModelScope.launch(Dispatchers.IO) {
             val author = authorRepo.getSelectedAuthorFilter()

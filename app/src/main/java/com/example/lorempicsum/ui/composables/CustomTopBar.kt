@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraEnhance
 import androidx.compose.material.icons.outlined.FilterAlt
+import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SortByAlpha
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,6 +33,8 @@ import com.example.lorempicsum.R
 fun CustomTopBar(
     onFilterClick: () -> Unit,
     onSortClick: () -> Unit,
+    onDisableOfflineModeClick: () -> Unit,
+    showDisableOfflineMode: Boolean
 ) {
     TopAppBar(
         title = {
@@ -54,25 +57,31 @@ fun CustomTopBar(
             }
         },
         actions = {
+            val colors = IconButtonColors(
+                IconButtonDefaults.iconButtonColors().containerColor,
+                MaterialTheme.colorScheme.onPrimary,
+                IconButtonDefaults.iconButtonColors().disabledContainerColor,
+                IconButtonDefaults.iconButtonColors().disabledContentColor
+            )
+
+            if (showDisableOfflineMode) {
+                IconButton(
+                    onClick = { onDisableOfflineModeClick() },
+                    colors = colors
+                ) {
+                    Icon(Icons.Outlined.Refresh, stringResource(R.string.refresh_icon_label))
+                }
+            }
+
             IconButton(
                 onClick = { onFilterClick() },
-                colors = IconButtonColors(
-                    IconButtonDefaults.iconButtonColors().containerColor,
-                    MaterialTheme.colorScheme.onPrimary,
-                    IconButtonDefaults.iconButtonColors().disabledContainerColor,
-                    IconButtonDefaults.iconButtonColors().disabledContentColor
-                )
+                colors = colors
             ) {
                 Icon(Icons.Outlined.FilterAlt, stringResource(R.string.filter_icon_label))
             }
             IconButton(
                 onClick = { onSortClick() },
-                colors = IconButtonColors(
-                    IconButtonDefaults.iconButtonColors().containerColor,
-                    MaterialTheme.colorScheme.onPrimary,
-                    IconButtonDefaults.iconButtonColors().disabledContainerColor,
-                    IconButtonDefaults.iconButtonColors().disabledContentColor
-                )
+                colors = colors
             ) {
                 Icon(Icons.Outlined.SortByAlpha, stringResource(R.string.sort_icon_label))
             }
