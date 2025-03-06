@@ -4,4 +4,8 @@
     <string name="dropdown_icon">DropDown Icon</string>
     <string name="filter_label">Filter:</string>
     <string name="clear">Clear</string>
+    <string name="retry">Retry</string>
+    <string name="error_getting_image_data">Error getting image data</string>
+    <string name="no_image_data_error">No image data was returned from the API...</string>
+    <string name="generic_api_error">Please check your internet and try again soon...</string>
 </resources>

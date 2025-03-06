@@ -43,6 +43,8 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 
 koil = { module = "io.coil-kt:coil-compose", version.ref = "koil" }
 
+lottie = { module = "com.airbnb.android:lottie-compose", version = "6.0.0" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

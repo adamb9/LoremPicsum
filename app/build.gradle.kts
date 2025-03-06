@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.bundles.coroutines)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.koin)
+    implementation(libs.lottie)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
