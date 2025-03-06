@@ -3,7 +3,7 @@ package com.example.lorempicsum.entity
 import com.example.lorempicsum.data.api.ImageResponse
 
 data class ImageEntity(
-    val id: String,
+    val id: Int,
     val author: String,
     val width: Int,
     val height: Int,

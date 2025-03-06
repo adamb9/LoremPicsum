@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ImageResponse(
-    val id: String,
+    val id: Int,
     val author: String,
     val width: Int,
     val height: Int,

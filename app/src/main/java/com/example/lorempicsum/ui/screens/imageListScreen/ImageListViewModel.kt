@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lorempicsum.repo.AuthorRepo
 import com.example.lorempicsum.repo.ImageRepo
+import com.example.lorempicsum.ui.composables.filterSort.SortType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -66,6 +67,41 @@ class ImageListViewModel(
         }
     }
 
+    fun sortImages(sortType: SortType) {
+        val sortedImages = when (sortType) {
+            SortType.ID_ASCENDING -> state.value.images.sortedBy { it.id }
+            SortType.ID_DESCENDING -> state.value.images.sortedByDescending { it.id }
+            SortType.AUTHOR_ASCENDING -> state.value.images.sortedBy { it.author }
+            SortType.AUTHOR_DESCENDING -> state.value.images.sortedByDescending { it.author }
+        }
+        _state.value = _state.value.copy(
+            sortType = sortType,
+            images = sortedImages
+        )
+        if (state.value.filteredImages != null) {
+            val sortedFilteredImages = when (sortType) {
+                SortType.ID_ASCENDING -> state.value.filteredImages?.sortedBy { it.id }
+                SortType.ID_DESCENDING -> state.value.filteredImages?.sortedByDescending { it.id }
+                else -> state.value.filteredImages
+            }
+            _state.value = _state.value.copy(
+                filteredImages = sortedFilteredImages
+            )
+        }
+    }
+
+    fun onFilterClick() {
+        _state.value = _state.value.copy(
+            isFilterSelected = !_state.value.isFilterSelected,
+        )
+    }
+
+    fun onSortClick() {
+        _state.value = _state.value.copy(
+            isSortSelected = !_state.value.isSortSelected,
+        )
+    }
+
     private fun restoreLastSavedAuthorFilter() {
         viewModelScope.launch(Dispatchers.IO) {
             val author = authorRepo.getSelectedAuthorFilter()
@@ -75,7 +111,7 @@ class ImageListViewModel(
 
     private fun resetState() {
         _state.value = _state.value.copy(
-            isLoading = false,
+            isLoading = true,
             isApiError = false,
             noDataAvailable = false,
             images = emptyList(),

@@ -1,4 +1,4 @@
-package com.example.lorempicsum.ui.composables
+package com.example.lorempicsum.ui.composables.filterSort
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
