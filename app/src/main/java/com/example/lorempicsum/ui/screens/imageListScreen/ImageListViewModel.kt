@@ -4,20 +4,18 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.lorempicsum.data.api.ImageApiServiceImpl
-import com.example.lorempicsum.repo.ImageRepoImpl
+import com.example.lorempicsum.repo.AuthorRepo
+import com.example.lorempicsum.repo.ImageRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ImageListViewModel(
-
+    private val imageRepo: ImageRepo,
+    private val authorRepo: AuthorRepo
 ) : ViewModel() {
 
     private val _state = mutableStateOf(ImageListState())
     val state: State<ImageListState> = _state
-
-    val apiService = ImageApiServiceImpl()
-    val repo = ImageRepoImpl(apiService)
 
     fun loadImagesFromAPI() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -25,7 +23,7 @@ class ImageListViewModel(
                 isLoading = true
             )
             try {
-                val imageList = repo.getImageList(1, 30)
+                val imageList = imageRepo.getImageList(1, 30)
                 if (imageList.isEmpty()) {
                     _state.value = _state.value.copy(
                         noDataAvailable = true
@@ -44,7 +42,7 @@ class ImageListViewModel(
                     isApiError = true
                 )
             }
-
+            restoreLastSavedAuthorFilter()
         }
     }
 
@@ -63,6 +61,16 @@ class ImageListViewModel(
             selectedAuthor = author,
             filteredImages = filteredImages
         )
+        viewModelScope.launch(Dispatchers.IO) {
+            authorRepo.setSelectedAuthorFilter(author)
+        }
+    }
+
+    private fun restoreLastSavedAuthorFilter() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val author = authorRepo.getSelectedAuthorFilter()
+            filterImagesByAuthor(author)
+        }
     }
 
     private fun resetState() {

@@ -11,28 +11,16 @@ import androidx.compose.ui.Modifier
 import com.example.lorempicsum.ui.screens.imageListScreen.ImageListScreen
 import com.example.lorempicsum.ui.screens.imageListScreen.ImageListViewModel
 import com.example.lorempicsum.ui.theme.LoremPicsumTheme
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ImageListViewModel()
-
-        startKoin {
-            androidLogger()
-            androidContext(this@MainActivity)
-            modules(
-                //interactionModule, networkModule, presentationModule, repositoryModule
-            )
-        }
-
-
-        //enableEdgeToEdge()
         setContent {
             LoremPicsumTheme {
+                val viewModel = koinViewModel<ImageListViewModel>()
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Surface(modifier = Modifier.padding(innerPadding)) {
                         ImageListScreen(viewModel)
