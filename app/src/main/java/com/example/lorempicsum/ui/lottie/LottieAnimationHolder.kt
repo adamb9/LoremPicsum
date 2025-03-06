@@ -17,6 +17,8 @@ fun LottieAnimationHolder(type: LottieType) {
     }
     LottieAnimation(
         composition = file.value,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        speed = 0.75f,
+        iterations = Int.MAX_VALUE
     )
 }
