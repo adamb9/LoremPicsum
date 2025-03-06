@@ -43,10 +43,16 @@ fun ImageListScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            DropdownMenuFilterRow(state.authors)
+            DropdownMenuFilterRow(
+                selectedAuthor = state.selectedAuthor,
+                names = state.authors,
+                onFilterChanged = {
+                    viewModel.filterImagesByAuthor(it)
+                }
+            )
             HorizontalDivider(color = Color.LightGray, thickness = 2.dp)
 
-            ImageList(state.images)
+            ImageList(state.filteredImages ?: state.images)
         }
     }
 

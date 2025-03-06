@@ -53,6 +53,18 @@ class ImageListViewModel(
         loadImagesFromAPI()
     }
 
+    fun filterImagesByAuthor(author: String?) {
+        val filteredImages = if (author == null) {
+            null
+        } else {
+            state.value.images.filter { it.author == author }
+        }
+        _state.value = _state.value.copy(
+            selectedAuthor = author,
+            filteredImages = filteredImages
+        )
+    }
+
     private fun resetState() {
         _state.value = _state.value.copy(
             isLoading = false,

@@ -7,5 +7,7 @@ data class ImageListState(
     val isApiError: Boolean = false,
     val noDataAvailable: Boolean = false,
     val images: List<ImageEntity> = emptyList(),
-    val authors: List<String> = emptyList()
+    val filteredImages: List<ImageEntity>? = null,
+    val authors: List<String> = emptyList(),
+    val selectedAuthor: String? = null
 )

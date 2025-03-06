@@ -23,13 +23,13 @@ import androidx.compose.ui.unit.dp
 import com.example.lorempicsum.R
 
 @Composable
-fun DropdownMenuFilterRow(names: List<String>) {
+fun DropdownMenuFilterRow(
+    selectedAuthor: String?,
+    names: List<String>,
+    onFilterChanged: (String?) -> Unit
+) {
     val isDropDownExpanded = remember {
         mutableStateOf(false)
-    }
-
-    val selectedName = remember {
-        mutableStateOf("")
     }
 
     Row(
@@ -58,7 +58,7 @@ fun DropdownMenuFilterRow(names: List<String>) {
                         isDropDownExpanded.value = true
                     }
             ) {
-                Text(text = selectedName.value)
+                Text(text = selectedAuthor ?: "")
                 Image(
                     painter = painterResource(id = R.drawable.drop_down_ic),
                     contentDescription = stringResource(R.string.dropdown_icon)
@@ -75,7 +75,7 @@ fun DropdownMenuFilterRow(names: List<String>) {
                         text = { Text(text = it) },
                         onClick = {
                             isDropDownExpanded.value = false
-                            selectedName.value = it
+                            onFilterChanged(it)
                         }
                     )
                 }
@@ -83,7 +83,7 @@ fun DropdownMenuFilterRow(names: List<String>) {
         }
         Button(
             onClick = {
-                selectedName.value = ""
+                onFilterChanged(null)
             },
             modifier = Modifier.weight(2f)
         ) {
