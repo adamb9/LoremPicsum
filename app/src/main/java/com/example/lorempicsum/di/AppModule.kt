@@ -5,8 +5,10 @@ import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.room.Room
 import com.example.lorempicsum.data.api.ImageApiService
 import com.example.lorempicsum.data.api.ImageApiServiceImpl
+import com.example.lorempicsum.data.db.LoremPicsumDatabase
 import com.example.lorempicsum.repo.AuthorRepo
 import com.example.lorempicsum.repo.AuthorRepoImpl
 import com.example.lorempicsum.repo.ImageRepo
@@ -33,6 +35,13 @@ val appModule = module {
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             produceFile = { androidContext().preferencesDataStoreFile(USER_PREFERENCES) }
         )
+    }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            LoremPicsumDatabase::class.java,
+            "loremPicsum.db"
+        ).build().imageDao()
     }
     singleOf(::ImageApiServiceImpl).bind<ImageApiService>()
     singleOf(::ImageRepoImpl).bind<ImageRepo>()

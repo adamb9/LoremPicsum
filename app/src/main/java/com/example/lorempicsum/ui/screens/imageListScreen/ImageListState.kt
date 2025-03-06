@@ -7,6 +7,7 @@ data class ImageListState(
     val isLoading: Boolean = true,
     val isApiError: Boolean = false,
     val noDataAvailable: Boolean = false,
+    val offlineModeEnabled: Boolean = false,
 
     val images: List<ImageEntity> = emptyList(),
     val filteredImages: List<ImageEntity>? = null,

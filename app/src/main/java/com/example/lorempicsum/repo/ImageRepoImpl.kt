@@ -2,6 +2,7 @@ package com.example.lorempicsum.repo
 
 import com.example.lorempicsum.data.api.ImageApiService
 import com.example.lorempicsum.data.api.ImageResponse
+import com.example.lorempicsum.data.db.ImageDao
 import com.example.lorempicsum.entity.ImageEntity
 import com.example.lorempicsum.exceptions.ExternalAPIException
 import io.ktor.client.call.body
@@ -9,11 +10,12 @@ import io.ktor.http.HttpStatusCode
 import kotlin.coroutines.cancellation.CancellationException
 
 class ImageRepoImpl(
-    private val apiService: ImageApiService
+    private val apiService: ImageApiService,
+    private val imageDao: ImageDao
 ) : ImageRepo {
 
     @Throws(ExternalAPIException::class, CancellationException::class)
-    override suspend fun getImageList(page: Int, limit: Int): List<ImageEntity> {
+    override suspend fun getImageListOnline(page: Int, limit: Int): List<ImageEntity> {
         val response = apiService.getImageList(page, limit)
         val imageList = mutableListOf<ImageEntity>()
         when (response.status) {
@@ -29,7 +31,16 @@ class ImageRepoImpl(
                 throw ExternalAPIException("Error getting data from picsum.photos: ${response.status.description}")
             }
         }
+        storeImageList(imageList)
         return imageList
+    }
+
+    override suspend fun getImageListOffline(): List<ImageEntity> {
+        return imageDao.getAll()
+    }
+
+    private suspend fun storeImageList(imageList: List<ImageEntity>) {
+        return imageDao.upsertAll(imageList)
     }
 
 }

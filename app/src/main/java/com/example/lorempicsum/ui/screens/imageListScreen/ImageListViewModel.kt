@@ -18,13 +18,16 @@ class ImageListViewModel(
     private val _state = mutableStateOf(ImageListState())
     val state: State<ImageListState> = _state
 
-    fun loadImagesFromAPI() {
+    fun loadImages(offlineMode: Boolean = false) {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = _state.value.copy(
                 isLoading = true
             )
             try {
-                val imageList = imageRepo.getImageList(1, 30)
+                val imageList = when (offlineMode) {
+                    true -> imageRepo.getImageListOffline()
+                    else -> imageRepo.getImageListOnline(1, 30)
+                }
                 if (imageList.isEmpty()) {
                     _state.value = _state.value.copy(
                         noDataAvailable = true
@@ -49,7 +52,7 @@ class ImageListViewModel(
 
     fun retryLoadingImages() {
         resetState()
-        loadImagesFromAPI()
+        loadImages()
     }
 
     fun filterImagesByAuthor(author: String?) {
@@ -100,6 +103,15 @@ class ImageListViewModel(
         _state.value = _state.value.copy(
             isSortSelected = !_state.value.isSortSelected,
         )
+    }
+
+    fun enableOfflineMode() {
+        _state.value = _state.value.copy(
+            offlineModeEnabled = true,
+            isApiError = false,
+            noDataAvailable = false
+        )
+        loadImages(true)
     }
 
     private fun restoreLastSavedAuthorFilter() {

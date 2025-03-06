@@ -1,9 +1,12 @@
 package com.example.lorempicsum.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.lorempicsum.data.api.ImageResponse
 
+@Entity
 data class ImageEntity(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val author: String,
     val width: Int,
     val height: Int,

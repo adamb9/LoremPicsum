@@ -29,7 +29,7 @@ fun ImageListScreen(
     val state = viewModel.state.value
 
     LaunchedEffect(Unit) {
-        viewModel.loadImagesFromAPI()
+        viewModel.loadImages()
     }
 
     Scaffold(
@@ -51,7 +51,8 @@ fun ImageListScreen(
 
             ErrorMessageHolder(
                 state = state,
-                onRetryClicked = { viewModel.retryLoadingImages() }
+                onRetryClicked = { viewModel.retryLoadingImages() },
+                onEnableOfflineModeClicked = { viewModel.enableOfflineMode() }
             )
             LoadingIconHolder(
                 state = state

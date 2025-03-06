@@ -5,8 +5,9 @@
     <string name="filter_label">Filter:</string>
     <string name="clear">Clear</string>
     <string name="retry">Retry</string>
+    <string name="offline_mode">Offline Mode</string>
     <string name="error_getting_image_data">Error getting image data</string>
-    <string name="no_image_data_error">No image data was returned from the API...</string>
+    <string name="no_image_data_error">No image data available...</string>
     <string name="generic_api_error">Please check your internet and try again soon...</string>
     <string name="top_bar_icon_label">Top Bar icon</string>
     <string name="filter_icon_label">filterIcon</string>

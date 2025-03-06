@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlinSerialization)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -41,6 +42,9 @@ android {
 }
 
 dependencies {
+    ksp(libs.room.compiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -60,6 +64,7 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.datastore)
 
+    testImplementation(libs.room.test)
     testImplementation(libs.junit)
     testImplementation(libs.koin.test)
     androidTestImplementation(libs.androidx.junit)

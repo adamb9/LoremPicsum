@@ -13,7 +13,8 @@ import com.example.lorempicsum.ui.screens.imageListScreen.ImageListState
 @Composable
 fun ErrorMessageHolder(
     state: ImageListState,
-    onRetryClicked: () -> Unit
+    onRetryClicked: () -> Unit,
+    onEnableOfflineModeClicked: () -> Unit
 ) {
 
     AnimatedVisibility(
@@ -24,8 +25,8 @@ fun ErrorMessageHolder(
         ErrorMessageContent(
             mainText = stringResource(R.string.error_getting_image_data),
             subText = stringResource(R.string.no_image_data_error),
-            onClick = {
-                onRetryClicked.invoke()
+            onRetryClicked = {
+                onRetryClicked()
             }
         )
     }
@@ -37,8 +38,12 @@ fun ErrorMessageHolder(
         ErrorMessageContent(
             mainText = stringResource(R.string.error_getting_image_data),
             subText = stringResource(R.string.generic_api_error),
-            onClick = {
-                onRetryClicked.invoke()
+            onRetryClicked = {
+                onRetryClicked()
+            },
+            showOfflineOption = true,
+            onEnableOfflineModeClicked = {
+                onEnableOfflineModeClicked()
             }
         )
     }

@@ -21,7 +21,13 @@ import com.example.lorempicsum.ui.lottie.LottieAnimationHolder
 import com.example.lorempicsum.ui.lottie.LottieType
 
 @Composable
-fun ErrorMessageContent(mainText: String, subText: String, onClick: () -> Unit) {
+fun ErrorMessageContent(
+    mainText: String,
+    subText: String,
+    onRetryClicked: () -> Unit,
+    showOfflineOption: Boolean = false,
+    onEnableOfflineModeClicked: () -> Unit = {}
+) {
 
     Column(
         modifier = Modifier
@@ -51,11 +57,20 @@ fun ErrorMessageContent(mainText: String, subText: String, onClick: () -> Unit) 
             )
             Spacer(Modifier.height(30.dp))
             FilledTonalButton(
-                onClick = onClick,
+                onClick = onRetryClicked,
                 content = {
                     Text(stringResource(R.string.retry))
                 }
             )
+            if (showOfflineOption) {
+                Spacer(Modifier.height(5.dp))
+                FilledTonalButton(
+                    onClick = onEnableOfflineModeClicked,
+                    content = {
+                        Text(stringResource(R.string.offline_mode))
+                    }
+                )
+            }
         }
 
     }
