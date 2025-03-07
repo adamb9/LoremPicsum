@@ -13,5 +13,6 @@
     * Images are cached in memory and on disk using Coil
     * Offline mode can be exited using Refresh button on TopBar
 * Lottie animations used for loading and error screens
+* Dependency Injection using Koin
 * Some unit tests and UI tests added but ran out of time with these
 * Sort by author or image ID (ascending or descending)
