@@ -1,7 +1,3 @@
-## Video Demo
-Please find a video demonstration of the app
-here: https://drive.google.com/file/d/1a09BqJ3ZQrZltGFEkBr3WePy8UXzfkts/view?usp=sharing
-
 ## Features
 * Pulls data from https://picsum.photos/v2/list
 * Displays list of images and author name
