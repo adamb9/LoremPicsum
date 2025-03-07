@@ -133,8 +133,8 @@ class ImageListViewModel(
             isLoading = true,
             isApiError = false,
             noDataAvailable = false,
+            offlineModeEnabled = false,
             images = emptyList(),
-            authors = emptyList()
         )
     }
 

@@ -14,9 +14,13 @@ import com.example.lorempicsum.repo.AuthorRepoImpl
 import com.example.lorempicsum.repo.ImageRepo
 import com.example.lorempicsum.repo.ImageRepoImpl
 import com.example.lorempicsum.ui.screens.imageListScreen.ImageListViewModel
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -42,6 +46,16 @@ val appModule = module {
             LoremPicsumDatabase::class.java,
             "loremPicsum.db"
         ).build().imageDao()
+    }
+    single {
+        HttpClient {
+            install(ContentNegotiation) {
+                json(Json {
+                    prettyPrint = true
+                    isLenient = true
+                })
+            }
+        }
     }
     singleOf(::ImageApiServiceImpl).bind<ImageApiService>()
     singleOf(::ImageRepoImpl).bind<ImageRepo>()

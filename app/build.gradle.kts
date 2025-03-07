@@ -39,9 +39,17 @@ android {
     buildFeatures {
         compose = true
     }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
+    implementation(libs.core.ktx)
     ksp(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
@@ -64,9 +72,20 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.datastore)
 
-    testImplementation(libs.room.test)
-    testImplementation(libs.junit)
+    testImplementation(libs.bundles.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.test.runner)
     testImplementation(libs.koin.test)
+    testImplementation(libs.turbine)
+
+    androidTestImplementation(libs.bundles.test)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.room.test)
+    androidTestImplementation(libs.koin.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.junit.ktx)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

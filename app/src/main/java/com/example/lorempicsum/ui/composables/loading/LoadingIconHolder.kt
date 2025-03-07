@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.example.lorempicsum.ui.lottie.LottieAnimationHolder
 import com.example.lorempicsum.ui.lottie.LottieType
 import com.example.lorempicsum.ui.screens.imageListScreen.ImageListState
@@ -23,7 +24,9 @@ fun LoadingIconHolder(
         exit = fadeOut()
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("Loading"),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
