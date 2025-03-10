@@ -26,7 +26,7 @@ fun LoadingIconHolder(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .testTag("Loading"),
+                .testTag("LoadingAnimation"),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

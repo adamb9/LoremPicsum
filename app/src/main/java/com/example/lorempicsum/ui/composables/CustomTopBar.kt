@@ -21,6 +21,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
@@ -47,7 +48,9 @@ fun CustomTopBar(
                 Icon(
                     imageVector = Icons.Filled.CameraEnhance,
                     contentDescription = stringResource(R.string.top_bar_icon_label),
-                    modifier = Modifier.padding(15.dp)
+                    modifier = Modifier
+                        .padding(15.dp)
+                        .testTag("CameraIcon")
                 )
                 Text(
                     text = stringResource(R.string.app_name),
@@ -67,21 +70,30 @@ fun CustomTopBar(
             if (showDisableOfflineMode) {
                 IconButton(
                     onClick = { onDisableOfflineModeClick() },
-                    colors = colors
+                    colors = colors,
+                    modifier = Modifier.testTag("RefreshIcon")
                 ) {
-                    Icon(Icons.Outlined.Refresh, stringResource(R.string.refresh_icon_label))
+                    Icon(
+                        imageVector = Icons.Outlined.Refresh,
+                        contentDescription = stringResource(R.string.refresh_icon_label),
+                    )
                 }
             }
 
             IconButton(
                 onClick = { onFilterClick() },
-                colors = colors
+                colors = colors,
+                modifier = Modifier.testTag("FilterIcon")
             ) {
-                Icon(Icons.Outlined.FilterAlt, stringResource(R.string.filter_icon_label))
+                Icon(
+                    Icons.Outlined.FilterAlt,
+                    stringResource(R.string.filter_icon_label)
+                )
             }
             IconButton(
                 onClick = { onSortClick() },
-                colors = colors
+                colors = colors,
+                modifier = Modifier.testTag("SortIcon")
             ) {
                 Icon(Icons.Outlined.SortByAlpha, stringResource(R.string.sort_icon_label))
             }

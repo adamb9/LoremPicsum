@@ -34,7 +34,7 @@ fun ErrorMessageContent(
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)
-            .testTag("Error"),
+            .testTag("ErrorMessageContent"),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
@@ -48,17 +48,20 @@ fun ErrorMessageContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
+                modifier = Modifier.testTag("MainText"),
                 text = mainText,
                 fontSize = TextUnit(24F, TextUnitType.Sp),
                 fontWeight = FontWeight.Bold,
             )
             Text(
+                modifier = Modifier.testTag("SubText"),
                 text = subText,
                 fontSize = TextUnit(18F, TextUnitType.Sp),
                 fontWeight = FontWeight.Light,
             )
             Spacer(Modifier.height(30.dp))
             FilledTonalButton(
+                modifier = Modifier.testTag("RetryButton"),
                 onClick = onRetryClicked,
                 content = {
                     Text(stringResource(R.string.retry))
@@ -67,6 +70,7 @@ fun ErrorMessageContent(
             if (showOfflineOption) {
                 Spacer(Modifier.height(5.dp))
                 FilledTonalButton(
+                    modifier = Modifier.testTag("OfflineButton"),
                     onClick = onEnableOfflineModeClicked,
                     content = {
                         Text(stringResource(R.string.offline_mode))

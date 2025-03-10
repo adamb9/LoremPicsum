@@ -14,13 +14,19 @@
       <SelectionState runConfigName="upsertAll_updatesExistingData()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ImageListScreen_showLoadingIndicator()">
+      <SelectionState runConfigName="FilterSortHolderTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ImageListScreenTest">
+      <SelectionState runConfigName="filterSortHolder_displaysDropdownMenuFilterRow_whenIsFilterSelected()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="imageListScreen_loadingComplete_showImageList()">
+      <SelectionState runConfigName="LoadingIconHolderTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ImageCardTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="CustomTopBarTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
